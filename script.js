@@ -15,6 +15,28 @@ const dummyTransactions = [
 
 let transactions = dummyTransactions;
 
+function addTransaction(e) {
+    e.preventDefault();
+    if(text.value.trim()==='' || amount.value==='') alert('Must add something before submit');
+    else {
+        const transaction = {
+            id:generateID(),
+            text:text.value,
+            amount:+amount.value
+        }
+        transactions.push(transaction);
+        addTransactionDOM(transaction);
+        updateValues();
+        text.value='';
+        amount.value='';
+    }
+}
+
+function generateID() {
+    return Math.floor(Math.random()*1000);
+}
+
+
 function addTransactionDOM(transaction) {
     const sign = transaction.amount > 0 ? '+' : '-';
     const item = document.createElement('li');
@@ -23,10 +45,26 @@ function addTransactionDOM(transaction) {
     list.appendChild(item);
 }
 
+function updateValues() {
+
+    const amounts = transactions.map(transaction=>transaction.amount);
+    const total= amounts.reduce((acc,item)=>(acc+=item),0).toFixed(2);
+
+    const income = amounts.filter(item => item>0).reduce((acc,item)=>(acc+=item),0).toFixed(2);
+    const expense = (amounts.filter(item => item<0).reduce((acc,item)=>(acc+=item),0)*-1).toFixed(2);
+
+    balance.innerText=`$${total}`;
+    money_plus.innerText=`$${income}`;
+    money_minus.innerText=`$${expense}`;
+}
+
 function init() {
     list.innerHTML='';
-    transactions.forEach(transaction=>addTransactionDOM(transaction));
+    transactions.forEach(addTransactionDOM);
+    updateValues() ;
 }
+
+form.addEventListener('submit',addTransaction);
 
 init();
 
