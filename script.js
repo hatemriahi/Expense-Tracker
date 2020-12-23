@@ -13,3 +13,12 @@ const dummyTransactions = [
 ];
 
 
+let transactions = dummyTransactions;
+
+function addTransactionDOM(transaction) {
+    const sign = transaction.amount > 0 ? '+' : '-';
+    const item = document.createElement('li');
+    item.classList.add(transaction.amount > 0 ? 'plus' : 'minus' );
+    item.innerHTML=`${transaction.text} <span>${sign}${Math.abs(transaction.amount)}</span>`;
+}
+
