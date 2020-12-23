@@ -51,7 +51,7 @@ function addTransactionDOM(transaction) {
 function removeTransaction(id) {
     transactions= transactions.filter(transaction => transaction.id !== id);
     updateLocalStorage();
-    init();
+    init(); 
 }
 
 function updateValues() {
