@@ -126,9 +126,12 @@ input[type='text'],input[type='number'] {
 }
 
 
-.list li.plus {
+.list li.minus{
     border-right: 5px solid #c0392b;
 }
+
+
+
 
 .delete-btn{
     cursor: pointer;
@@ -143,7 +146,7 @@ input[type='text'],input[type='number'] {
     left: 0;
     transform: translate(-100%,-50%);
     opacity: 0;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.3s ease-in;
 }
 
 .list li:hover .delete-btn{
